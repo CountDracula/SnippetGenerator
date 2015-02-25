@@ -15,20 +15,21 @@ public class SnippetGenerator
     private File file;
     private String input;
     private ArrayList<String> finalWords;
-
+    private String endResult;
     private StringBuilder sb;
 
     public SnippetGenerator() throws FileNotFoundException {
 
-        file = new File("C:\\temp\\test.txt");
-
+        file = new File("C:\\temp\\test2.txt");
         reader = new BufferedReader(new FileReader(file));
         input = null;
+
 
     }
 
 
     public void getSnippets(String word, int snippet) throws IOException {
+
         sb = new StringBuilder(snippet * 3); // Big capacity to test this shit properly
         sb.append("The snippet is: ");
 
@@ -58,51 +59,38 @@ public class SnippetGenerator
                     if (s.equals(word)) {
                         previous = wordList.indexOf(s) - snippet;
                         next = wordList.indexOf(s) + snippet;
-
-
                         finalWords = new ArrayList<String>(wordList.subList(previous, next + 1)); // Needs to be next+1 or the last entry is not included?
 
 
                     }
 
                 }
+
+                // If there are more than 1 occurrence ...
             } else {
                 finalWords = new ArrayList<String>();
-int p;
-                int n;
-                for(int i=0; i<wordList.size(); i++){
-                    if(wordList.get(i).equals(word))
-                    {
-                        /// ERROR IS HERE. P and N don't update!
-                       p = wordList.indexOf(wordList.get(i)) - snippet;
-                       n = wordList.indexOf(wordList.get(i)) + snippet;
-                        //System.out.println(i); /// Get i to get index of each occurrence of the word
-                        /// So far so good...
-                        /// But 2nd iteration fucks everything up.
+                sb.setLength(0); // Clear the sb
+                sb.append("The snippets are: ");
 
-                        finalWords.add(wordList.get(p));
-                        finalWords.add(wordList.get(i));
-                        finalWords.add(wordList.get(n));
-
-                        System.out.println("i on : " + i);
-                        System.out.println("P = " + p);
-                        System.out.println("N =" + n);
-                        System.out.println(finalWords.toString());
+                for (int j = 0; j < wordList.size(); j++) {
 
 
+                    if (wordList.get(j).equals(word)) {
+
+                        int p = j - snippet;
+                        int n = j + snippet;
 
 
+                        /// Option one
+                        finalWords.addAll(wordList.subList(p, n + 1));
 
 
                     }
                 }
-                }
-
 
             }
         }
-
-
+    }
 
 
     public String printResults() {
@@ -111,9 +99,9 @@ int p;
         for (String toPrint : finalWords) {
             sb.append(toPrint + " ");
         }
-
-        System.out.println(sb.toString());
-        return sb.toString();
+        endResult = sb.toString();
+        System.out.println(endResult);
+        return endResult;
     }
 }
 
