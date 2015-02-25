@@ -20,7 +20,7 @@ public class SnippetGenerator
 
     public SnippetGenerator() throws FileNotFoundException {
 
-        file = new File("C:\\temp\\test2.txt");
+        file = new File("C:\\temp\\test.txt");
         reader = new BufferedReader(new FileReader(file));
         input = null;
 
@@ -34,7 +34,8 @@ public class SnippetGenerator
         sb.append("The snippet is: ");
 
 
-        while ((input = reader.readLine()) != null && reader.ready()) {
+        while ((input = reader.readLine()) != null) {
+
             words = input.split("[ \n\t\r,;:(){}]"); /// Modify this to change where to split each word. I took out !? and .
 
 
