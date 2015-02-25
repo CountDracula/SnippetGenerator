@@ -32,14 +32,14 @@ public class SnippetGenerator
 
 
 
-        // If reader ready it doesnt enter loop after each line.
+
         while ((input = reader.readLine()) != null) {
 
             words = input.split("[ \n\t\r,;:(){}]"); /// Modify this to change where to split each word. I took out !? and .
             Collections.addAll(wordList, words);
 
         }
-        sb = new StringBuilder(words.length); // Big capacity to test this shit properly
+        sb = new StringBuilder(words.length); // Set stringbuilder initial size
         sb.append("The snippet is: ");
 
             // If the word is not in the file, close the reader and inform the user.
@@ -87,6 +87,8 @@ public class SnippetGenerator
 
                         /// Option one
                         finalWords.addAll(wordList.subList(p, n + 1));
+
+
 
 
                     }
