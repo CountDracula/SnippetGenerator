@@ -33,7 +33,7 @@ public class SnippetGenerator
 
 
         while ((input = reader.readLine()) != null && reader.ready()) {
-            words = input.split("[ \n\t\r,;:(){}]");
+            words = input.split("[ \n\t\r,;:(){}]"); /// Modify this to change where to split each word. I took out !? and .
 
 
             wordList = new ArrayList<String>(Arrays.asList(words));
@@ -45,23 +45,21 @@ public class SnippetGenerator
 
         }
 
-
+            System.out.println("Your word was: " + word.toUpperCase() + " and you asked for " + snippet + " words before & after");
                 for (String s : wordList) {
                     int previous;
                     int next;
 
+
                     if (word.equals(s)) {
                         previous = wordList.indexOf(s) - snippet;
                         next = wordList.indexOf(s) + snippet;
-                        System.out.println("Your word was: " + word + " and you asked for " + snippet + " words before & after");
+
 
                         finalWords = new ArrayList<String>(wordList.subList(previous, next + 1)); // Needs to be next+1 or the last entry is not included?
 
 
-                        /// append each string in finalwords to stringbuilder
-                        for (String toPrint : finalWords) {
-                            sb.append(toPrint + " ");
-                        }
+
 
 
                     }
@@ -74,6 +72,11 @@ public class SnippetGenerator
 public String printResults()
 {
     // Display the snippet
+    /// append each string in finalwords to stringbuilder
+    for (String toPrint : finalWords) {
+        sb.append(toPrint + " ");
+    }
+
     System.out.println(sb.toString());
 return sb.toString();
 }
