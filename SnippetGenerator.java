@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -20,32 +19,35 @@ public class SnippetGenerator
 
     public SnippetGenerator() throws FileNotFoundException {
 
-        file = new File("C:\\temp\\test.txt");
+        file = new File("C:\\temp\\pepe.txt");
         reader = new BufferedReader(new FileReader(file));
         input = null;
+        wordList = new ArrayList<String>();
 
 
     }
 
-
+    // TODO fix array out of bounds
     public void getSnippets(String word, int snippet) throws IOException {
 
-        sb = new StringBuilder(snippet * 3); // Big capacity to test this shit properly
-        sb.append("The snippet is: ");
 
 
+        // If reader ready it doesnt enter loop after each line.
         while ((input = reader.readLine()) != null) {
 
             words = input.split("[ \n\t\r,;:(){}]"); /// Modify this to change where to split each word. I took out !? and .
+            Collections.addAll(wordList, words);
 
-
-            wordList = new ArrayList<String>(Arrays.asList(words));
+        }
+        sb = new StringBuilder(words.length); // Big capacity to test this shit properly
+        sb.append("The snippet is: ");
 
             // If the word is not in the file, close the reader and inform the user.
             if (!wordList.contains(word)) {
-                reader.close();
-                System.out.println("Sorry, that word is not in the text file!");
 
+                System.out.println("Sorry, that word is not in the text file!");
+                reader.close();
+                System.exit(0);
             }
 
 
@@ -70,6 +72,7 @@ public class SnippetGenerator
                 // If there are more than 1 occurrence ...
             } else {
                 finalWords = new ArrayList<String>();
+                System.out.println("Your word was: " + word.toUpperCase() + " and you asked for " + snippet + " words before & after");
                 sb.setLength(0); // Clear the sb
                 sb.append("The snippets are: ");
 
@@ -91,7 +94,7 @@ public class SnippetGenerator
 
             }
         }
-    }
+
 
 
     public String printResults() {
