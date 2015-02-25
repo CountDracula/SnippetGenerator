@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Pepe on 25.2.2015.
@@ -27,7 +29,7 @@ public class SnippetGenerator
 
     }
 
-    // TODO fix array out of bounds
+    // TODO fix array out of bounds && split snippets better at endResult
     public void getSnippets(String word, int snippet) throws IOException {
 
 
@@ -97,7 +99,25 @@ public class SnippetGenerator
             }
         }
 
+// Regex way
+public void getbyRegex(String word, int snippet) throws IOException {
 
+
+
+    StringBuffer line = new StringBuffer();
+
+    while ((input = reader.readLine()) != null) {
+
+        line.append(" " + input);
+    }
+    Pattern pattern = Pattern.compile("([^\\s]+\\s+[^\\s]+)\\s+"+word+"\\s+([^\\s]+\\s[^\\s]+\\s+)");
+    Matcher matcher = pattern.matcher(line.toString());
+    while (matcher.find())
+    {
+        System.out.println(matcher.group(0));
+
+    }
+}
 
     public String printResults() {
         // Display the snippet
