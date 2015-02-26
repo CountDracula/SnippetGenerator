@@ -7,9 +7,9 @@ public class SnippetTester {
     public static void main(String[] args) throws IOException {
 
        SnippetGenerator snippetGenerator = new SnippetGenerator();
-      // snippetGenerator.getSnippets("Jewish", 2);
-    snippetGenerator.getbyRegex("Jewish", 2);
-   // snippetGenerator.printResults();
+    // snippetGenerator.getSnippets("Jewish", 2);
+    snippetGenerator.getbyRegex("Jewish", 20);
+    //snippetGenerator.printResults();
 
 
     }

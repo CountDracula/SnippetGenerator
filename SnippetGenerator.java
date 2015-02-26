@@ -99,7 +99,7 @@ public class SnippetGenerator
             }
         }
 
-// Regex way
+// Regex way. Only works with 2 words though
 public void getbyRegex(String word, int snippet) throws IOException {
 
 
@@ -108,9 +108,19 @@ public void getbyRegex(String word, int snippet) throws IOException {
 
     while ((input = reader.readLine()) != null) {
 
-        line.append(" " + input);
+        line.append(input); // Append every word into a single string
     }
-    Pattern pattern = Pattern.compile("([^\\s]+\\s+[^\\s]+)\\s+"+word+"\\s+([^\\s]+\\s[^\\s]+\\s+)");
+
+    System.out.println("Your word was: " + word.toUpperCase() + " and you requested " + snippet + " words before & after it");
+    System.out.println("The snippets are :" + "\n");
+
+    // "((\\S+\\s+){0,1})" --- first group. \\S+ = one or more whitespace, \\s+ one or more non white-space character
+    // {0, "+snippet+"} range at least 0, look until snippet
+    // Pattern.quote turns word into regex literal
+    //"((\\s+\\S+){0,"+snippet+"})" second group
+
+
+Pattern pattern = Pattern.compile("((\\S+\\s+){0,"+snippet+"})" + Pattern.quote(word) + "((\\s+\\S+){0,"+snippet+"})");
     Matcher matcher = pattern.matcher(line.toString());
     while (matcher.find())
     {
