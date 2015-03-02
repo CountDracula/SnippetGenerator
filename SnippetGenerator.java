@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +19,7 @@ public class SnippetGenerator
     private ArrayList<String> finalWords;
     private String endResult;
     private StringBuilder sb;
+    HashMap<String, ArrayList<Integer>> indexes;
 
     public SnippetGenerator() throws FileNotFoundException {
 
@@ -99,7 +101,7 @@ public class SnippetGenerator
             }
         }
 
-// Regex way. Only works with 2 words though
+// Regex way.
 public void getbyRegex(String word, int snippet) throws IOException {
 
 
@@ -128,6 +130,8 @@ Pattern pattern = Pattern.compile("((\\S+\\s+){0,"+snippet+"})" + Pattern.quote(
 
     }
 }
+
+
 
     public String printResults() {
         // Display the snippet

@@ -8,9 +8,12 @@ public class SnippetTester {
 
        SnippetGenerator snippetGenerator = new SnippetGenerator();
     // snippetGenerator.getSnippets("Jewish", 2);
-    snippetGenerator.getbyRegex("Jewish", 20);
+   //snippetGenerator.getbyRegex("Jewish", 3);
+
     //snippetGenerator.printResults();
 
-
+SnippetGeneratorCombo snippetGeneratorCombo = new SnippetGeneratorCombo();
+        snippetGeneratorCombo.readFile();
+        snippetGeneratorCombo.getSnippets("Jewish", 3);
     }
 }
