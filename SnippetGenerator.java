@@ -45,7 +45,7 @@ public class SnippetGenerator
             Collections.addAll(wordList, input.split("[ \n\t\r,;:(){}]"));
 
         }
-        sb = new StringBuilder(words.length); // Set stringbuilder initial size
+        sb = new StringBuilder(wordList.size()); // Set stringbuilder initial size
         sb.append("The snippet is: ");
 
             // If the word is not in the file, close the reader and inform the user.
