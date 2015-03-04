@@ -39,8 +39,10 @@ public class SnippetGenerator
 
         while ((input = reader.readLine()) != null) {
 
-            words = input.split("[ \n\t\r,;:(){}]"); /// Modify this to change where to split each word. I took out !? and .
-            Collections.addAll(wordList, words);
+           // words = input.split("[ \n\t\r,;:(){}]"); /// Modify this to change where to split each word. I took out !? and .
+            //Collections.addAll(wordList, words);
+
+            Collections.addAll(wordList, input.split("[ \n\t\r,;:(){}]"));
 
         }
         sb = new StringBuilder(words.length); // Set stringbuilder initial size

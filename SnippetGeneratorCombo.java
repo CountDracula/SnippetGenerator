@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -30,9 +31,9 @@ public class SnippetGeneratorCombo {
     public void readFile() throws IOException {
         while ((input = reader.readLine()) != null) {
 
-            words = input.split("[ \n\t\r,;:(){}]"); /// Modify this to change where to split each word. I took out !? and .
-            Collections.addAll(wordList, words);
-            //System.out.println(wordList.toString());
+
+            Collections.addAll(wordList, input.split("[ \n\t\r,;:(){}]"));
+
         }
 
 
@@ -59,7 +60,7 @@ public class SnippetGeneratorCombo {
 
         for (int i = 0; i < dikke.size(); i++) {
             int position = dikke.get(i);
-            for (int k = position - snippet + 1; k < position + snippet + 1; k++) {
+            for (int k = position - snippet; k < position + snippet + 1; k++) {
 
                stringBuilder.append(wordList.get(k) + " ");
 
