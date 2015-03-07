@@ -9,7 +9,6 @@ import java.util.HashMap;
  */
 public class SnippetGeneratorCombo {
     private ArrayList<String> wordList;
-    private String[] words;
     private BufferedReader reader;
     private File file;
     private String input;
@@ -18,17 +17,19 @@ public class SnippetGeneratorCombo {
 
 
     public SnippetGeneratorCombo() throws FileNotFoundException {
-        file = new File("C:\\temp\\pepe.txt");
-        reader = new BufferedReader(new FileReader(file));
+
         input = null;
         wordList = new ArrayList<String>();
-
         indexes = new HashMap<String, ArrayList<Integer>>();
 
 
     }
 
-    public void readFile() throws IOException {
+    public void readFile(String filepath) throws IOException {
+
+        file = new File(filepath);
+        reader = new BufferedReader(new FileReader(file));
+
         while ((input = reader.readLine()) != null) {
 
 
@@ -48,30 +49,39 @@ public class SnippetGeneratorCombo {
 
         }
 
-        System.out.println(indexes.toString());
 
     }
 
     public void getSnippets(String word, int snippet) {
 
-        ArrayList<Integer> dikke = indexes.get(word);
+        ArrayList<Integer> wordsAround = indexes.get(word);
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (int i = 0; i < dikke.size(); i++) {
-            int position = dikke.get(i);
-            for (int k = position - snippet; k < position + snippet + 1; k++) {
+        System.out.println("Your word was " + word + " and you asked for " + snippet + " words before & after : " + "\n");
 
-               stringBuilder.append(wordList.get(k) + " ");
+        for (int i = 0; i < wordsAround.size(); i++) {
+            int position = wordsAround.get(i);
 
-                if (k>=(position+snippet))
-                {
-                    System.out.println(stringBuilder.toString());
-                    stringBuilder.setLength(0); /// Reset the string on every iteration
+
+            int end = position + snippet;
+
+            // Check that word and snippet are within bounds
+            if (end > wordList.size()) {
+                end = wordList.size() - 1;
+            }
+            for (int k = position - snippet; k < end + 1; k++) {
+
+                /// Check for bounds
+                if (k < 0) {
+                    k = 0;
                 }
 
-            }
+                stringBuilder.append(wordList.get(k) + " ");
 
+            }
+            System.out.println(stringBuilder.toString());
+            stringBuilder.setLength(0); /// Reset the string on every iteration
 
         }
 

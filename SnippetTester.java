@@ -6,14 +6,14 @@ import java.io.IOException;
 public class SnippetTester {
     public static void main(String[] args) throws IOException {
 
-       SnippetGenerator snippetGenerator = new SnippetGenerator();
-    //snippetGenerator.getSnippets("Jewish", 2);
-   snippetGenerator.getbyRegex("Jewish", 3);
+        SnippetGenerator snippetGenerator = new SnippetGenerator();
+        snippetGenerator.readFile("C:\\temp\\pepe.txt");
+        snippetGenerator.getSnippets("Jewish", 500);
+        // snippetGenerator.getbyRegex("President", 5);
 
-    //snippetGenerator.printResults();
 
-        SnippetGeneratorCombo snippetGeneratorCombo = new SnippetGeneratorCombo();
-        snippetGeneratorCombo.readFile();
-        snippetGeneratorCombo.getSnippets("Jewish", 3);
+        //SnippetGeneratorCombo snippetGeneratorCombo = new SnippetGeneratorCombo();
+        // snippetGeneratorCombo.readFile("C:\\temp\\pepe.txt");
+        //snippetGeneratorCombo.getSnippets("President", 500);
     }
 }
