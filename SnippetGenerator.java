@@ -15,7 +15,6 @@ public class SnippetGenerator
     private BufferedReader reader;
     private File file;
     private String input;
-    private ArrayList<String> finalWords;
     private StringBuilder sb;
     private StringBuffer line;
 
@@ -38,8 +37,9 @@ public class SnippetGenerator
             // words = input.split("[ \n\t\r,;:(){}]"); /// Modify this to change where to split each word. I took out !? and .
             //Collections.addAll(wordList, words);
 
-            line.append(input); // used by regex
-            Collections.addAll(wordList, input.split("[ \n\t\r,;:(){}]"));
+
+            line.append(input.replaceAll("^[^\\-a-zA-Z0-9\\s]+|[^\\-a-zA-Z0-9\\s]+$", " ")); // used by regex
+            Collections.addAll(wordList, input.split("[ \n\t\r;:()'-.{}]"));
 
 
         }
@@ -59,12 +59,13 @@ public class SnippetGenerator
             reader.close();
             System.exit(0);
         } else {
-            finalWords = new ArrayList<String>();
+
             System.out.println("Your word was: " + word.toUpperCase() + " and you asked for " + snippet + " words before & after");
             sb.setLength(0); // Clear the sb for a new line
             sb.append("The snippets are: ");
             System.out.println(sb);
             sb.setLength(0);
+
 
             for (int i = 0; i < wordList.size(); i++) {
 
@@ -96,11 +97,6 @@ public class SnippetGenerator
     // Regex way.
     public void getbyRegex(String word, int snippet) throws IOException {
 
-
-        while ((input = reader.readLine()) != null) {
-
-            line.append(input); // Append every word into a single string
-        }
 
         System.out.println("Your word was: " + word.toUpperCase() + " and you requested " + snippet + " words before & after it");
         System.out.println("The snippets are :" + "\n");

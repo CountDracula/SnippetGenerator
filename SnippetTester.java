@@ -8,8 +8,8 @@ public class SnippetTester {
 
         SnippetGenerator snippetGenerator = new SnippetGenerator();
         snippetGenerator.readFile("C:\\temp\\pepe.txt");
-        snippetGenerator.getSnippets("Jewish", 500);
-        // snippetGenerator.getbyRegex("President", 5);
+        snippetGenerator.getSnippets("President", 2);
+      // snippetGenerator.getbyRegex("President", 2);
 
 
         //SnippetGeneratorCombo snippetGeneratorCombo = new SnippetGeneratorCombo();
